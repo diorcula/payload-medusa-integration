@@ -1,6 +1,6 @@
 # MedusaJS and Payload CMS Integration Prototype
 
-Welcome to the MedusaJS and Payload CMS Integration Prototype repository. This project serves as a prototype to explore the integration possibilities of MedusaJS, a headless e-commerce platform, with Payload CMS, a powerful and flexible content management system.
+This project serves as a prototype to explore the integration possibilities of MedusaJS, a headless e-commerce platform, with Payload CMS, a powerful and flexible content management system.
 
 ## Project Overview
 
