@@ -17,6 +17,11 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
+// plugin related imports
+import MedusaPlugin from './plugins/medusa-plugin'
+// import MedusaProducts from './components/MedusaProducts'
+// end-plugin-imports
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -25,6 +30,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+
     user: Users.slug,
     livePreview: {
       breakpoints: [
@@ -54,13 +60,17 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
+
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
+    MedusaPlugin, //note that it also needs to be added to the plugins/index.ts file
   ],
+
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
