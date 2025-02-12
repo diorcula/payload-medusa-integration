@@ -19,7 +19,7 @@ import { getServerSideURL } from './utilities/getURL'
 
 // plugin related imports
 import MedusaPlugin from './plugins/medusa-plugin'
-// import MedusaProducts from './components/MedusaProducts'
+import MedusaProducts from './components/MedusaProducts'
 // end-plugin-imports
 
 const filename = fileURLToPath(import.meta.url)
@@ -29,6 +29,16 @@ export default buildConfig({
   admin: {
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+
+    components: {
+      views: {
+        //custom views are public by default; see reference: https://payloadcms.com/docs/guides/custom-views
+        myCustomView: {
+          Component: '/components/MedusaProducts',
+          path: '/medusa-products', // This is the path where the view will be accessible in the admin: admin/medusa-products
+        },
+      },
     },
 
     user: Users.slug,
