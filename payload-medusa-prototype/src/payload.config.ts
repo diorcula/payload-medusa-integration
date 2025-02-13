@@ -17,10 +17,18 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
-// plugin related imports
+import Medusa from '@medusajs/js-sdk'
 import MedusaPlugin from './plugins/medusa-plugin'
-import MedusaProducts from './components/MedusaProducts'
-// end-plugin-imports
+// import MedusaProducts from './components/MedusaProducts'
+
+// const sdk = new Medusa({
+//   baseUrl: 'http://localhost:9000/admin', // Replace with your Medusa backend URL
+//   debug: process.env.NODE_ENV === 'development',
+//   apiKey: process.env.MEDUSA_API_SECRET,
+//   // auth: {
+//   //   type: "session",
+//   // },
+// })
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

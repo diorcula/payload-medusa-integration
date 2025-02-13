@@ -19,6 +19,9 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@medusajs/js-sdk": "^2.5.0",
+    "@medusajs/medusa-js": "^6.1.10",
+    "@medusajs/types": "^2.5.0",
     "@payloadcms/db-mongodb": "^3.22.0",
     "@payloadcms/live-preview-react": "^3.22.0",
     "@payloadcms/next": "^3.22.0",
