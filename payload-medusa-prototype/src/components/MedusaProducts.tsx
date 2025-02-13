@@ -8,7 +8,6 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// import { sdk } from '../payload.config';
 import Medusa from '@medusajs/js-sdk';
 
 interface MedusaProductsProps {}
@@ -16,16 +15,14 @@ interface MedusaProductsProps {}
 const sdk = new Medusa({
   baseUrl: 'http://localhost:9000', // Replace with your Medusa backend URL
   debug: process.env.NODE_ENV === 'development',
-  apiKey: process.env.MEDUSA_API_SECRET,
-  // auth: {
-  //   type: "session",
-  // },
+  apiKey: process.env.NEXT_PUBLIC_MEDUSA_API_SECRET,
 })
 
 const MedusaProducts: React.FC<MedusaProductsProps> = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  console.log(process.env.NEXT_PUBLIC_MEDUSA_API_SECRET);
 
   useEffect(() => {
     const fetchProducts = async () => {
