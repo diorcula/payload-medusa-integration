@@ -1,13 +1,21 @@
 /**
  * This component fetches and displays a list of products from a Medusa API.
- * It takes `endpoint` and `apiKey` as props to make authenticated requests to the Medusa API.
+ * It uses the Medusa JS SDK to make authenticated requests to the Medusa API.
  * The fetched products are stored in the component's state and rendered as a list.
+ *
+ * - Imports React, useEffect, and useState from 'react'.
+ * - Imports Medusa from '@medusajs/js-sdk'.
+ * - Initializes the Medusa SDK with the base URL, debug mode, and API key.
+ * - Uses useState to manage the state of products and errors.
+ * - Uses useEffect to fetch products from the Medusa API when the component mounts.
+ * - Logs the API response and updates the state with the fetched products.
+ * - Handles errors by updating the error state and displaying an error message.
+ * - Renders a list of products or an error message.
  */
 
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Medusa from '@medusajs/js-sdk';
 
 interface MedusaProductsProps {}
@@ -21,8 +29,6 @@ const sdk = new Medusa({
 const MedusaProducts: React.FC<MedusaProductsProps> = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
-
-  console.log(process.env.NEXT_PUBLIC_MEDUSA_API_SECRET);
 
   useEffect(() => {
     const fetchProducts = async () => {
