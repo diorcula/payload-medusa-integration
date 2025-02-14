@@ -13,8 +13,7 @@ module.exports = defineConfig({
         process.env.AUTH_CORS ||
         "http://localhost:8000,http://localhost:9000,http://localhost:3000",
 
-      jwtSecret:
-        process.env.JWT_SECRET || "supersecret" || process.env.MEDUSA_API_KEY,
+      jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
   },

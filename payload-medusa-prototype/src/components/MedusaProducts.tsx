@@ -55,7 +55,7 @@ const MedusaProducts: React.FC<MedusaProductsProps> = () => {
 
   return (
     <div>
-      <h2>Medusa Products</h2>
+      <h1>Medusa Products</h1>
       <ul>
         {products.map((product) => (
           <li key={product.id}>{product.title}</li>
