@@ -17,12 +17,20 @@
 
 import React, { useEffect, useState } from 'react';
 import Medusa from '@medusajs/js-sdk';
-import { AdminViewComponent, AdminViewProps } from 'payload';
+import { Gutter } from '@payloadcms/ui'
 
 interface CustomAdminUIProps {
     // Define any required props here
 }
 
+/**
+ * Description
+ * @param {any} {baseUrl:'http://localhost:9000'
+ * @param {any} //ReplacewithyourMedusabackendURLdebug:process.env.NODE_ENV==='development'
+ * @param {any} apiKey:process.env.NEXT_PUBLIC_MEDUSA_API_SECRET
+ * @param {any} }
+ * @returns {any}
+ */
 const sdk = new Medusa({
   baseUrl: 'http://localhost:9000', // Replace with your Medusa backend URL
   debug: process.env.NODE_ENV === 'development',
@@ -57,6 +65,7 @@ const CustomAdminUI: React.FC<CustomAdminUIProps> = (props) => {
   }
 
   return (
+    <Gutter>
     <div>
       <h1>Medusa Products</h1>
       <ul>
@@ -65,6 +74,7 @@ const CustomAdminUI: React.FC<CustomAdminUIProps> = (props) => {
         ))}
       </ul>
     </div>
+    </Gutter>
   );
 };
 
