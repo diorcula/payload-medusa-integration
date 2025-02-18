@@ -13,7 +13,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
-import MedusaPlugin from './medusa-plugin' // Import MedusaPlugin
+// import MedusaPlugin from './medusa-plugin/medusa-plugin' // Import MedusaPlugin
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -92,5 +92,5 @@ export const plugins: Plugin[] = [
     },
   }),
   payloadCloudPlugin(),
-  MedusaPlugin, // Add MedusaPlugin to the plugins array
+  // MedusaPlugin, // Add MedusaPlugin to the plugins array
 ]

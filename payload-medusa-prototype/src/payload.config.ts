@@ -1,7 +1,5 @@
-// storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-
-import sharp from 'sharp' // sharp-import
+import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
@@ -16,10 +14,10 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
-
-// import Medusa from '@medusajs/js-sdk'
 import MedusaPlugin from './plugins/medusa-plugin'
-// import MedusaProducts from './components/MedusaProducts'
+
+// import MedusaPlugin from './plugins/medusa-plugin' // Ensure correct import
+// console.log('MedusaPlugin:', MedusaPlugin) // Add this line to log the plugin
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,19 +25,17 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     importMap: {
-      baseDir: path.resolve(dirname),
+      baseDir: path.resolve(dirname), // Ensure the base directory is correct
     },
-
     components: {
       views: {
-        //custom views are public by default; see reference: https://payloadcms.com/docs/guides/custom-views
-        myCustomView: {
-          Component: '/components/MedusaProducts',
+        // Custom views are public by default; see reference: https://payloadcms.com/docs/guides/custom-views
+        MedusaProductsView: {
+          Component: '/components/MedusaProducts.tsx', // Correct the path here
           path: '/medusa-products', // This is the path where the view will be accessible in the admin: admin/medusa-products
         },
       },
     },
-
     user: Users.slug,
     livePreview: {
       breakpoints: [
@@ -76,8 +72,8 @@ export default buildConfig({
 
   plugins: [
     ...plugins,
-    // storage-adapter-placeholder
-    MedusaPlugin, //note that it also needs to be added to the plugins/index.ts file
+    // Register the custom admin UI plugin
+    MedusaPlugin,
   ],
 
   secret: process.env.PAYLOAD_SECRET,

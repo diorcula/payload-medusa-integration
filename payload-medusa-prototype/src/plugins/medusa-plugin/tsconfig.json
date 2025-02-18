@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "jsx": "react", // Add this line to support JSX/TSX files
+    "baseUrl": "../../", // Adjust baseUrl to point to the root of the project
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["./**/*"], // Include all files in the current directory and subdirectories
+  "exclude": ["./dist"] // Exclude the dist directory
+}
