@@ -17,7 +17,7 @@ The primary goal of this prototype is to test how MedusaJS can be integrated wit
 
 One of the key functional requirements of this prototype is to research and validate the integration capabilities of MedusaJS with Payload CMS. This includes exploring the following aspects:
 
--[] Synchronization of product and content data between MedusaJS and Payload CMS.
--[] Implementation of user authentication and authorization mechanisms.
--[] Building a unified admin interface for managing both e-commerce and content-related tasks.
--[] Ensuring data consistency and integrity across both platforms.
+-[ ] Synchronization of product and content data between MedusaJS and Payload CMS.
+-[ ] Implementation of user authentication and authorization mechanisms.
+-[ ] Building a unified admin interface for managing both e-commerce and content-related tasks.
+-[ ] Ensuring data consistency and integrity across both platforms.
