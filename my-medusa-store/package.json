@@ -22,6 +22,7 @@
     "test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit"
   },
   "dependencies": {
+    "@lambdacurry/medusa-webhooks": "^1.0.0-rc.1",
     "@medusajs/admin-sdk": "2.5.0",
     "@medusajs/cli": "2.5.0",
     "@medusajs/framework": "2.5.0",
