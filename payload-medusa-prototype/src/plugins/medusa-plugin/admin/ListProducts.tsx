@@ -12,7 +12,7 @@ const sdk = new Medusa({
   apiKey: process.env.NEXT_PUBLIC_MEDUSA_API_SECRET,
 });
 
-
+// query function
 const fetchProducts = async () => {
   const response = await sdk.admin.product.list();
   console.log('API Response:', response); // Log the API response
@@ -27,7 +27,7 @@ const transformProductToRecord = (product: AdminProduct): Record<string, unknown
 
 const ListProducts: React.FC = () => {
   const { data: products = [], error } = useQuery({
-    queryKey: ['products'],
+    queryKey: ['admin-products'],
     queryFn: fetchProducts
   });
 
