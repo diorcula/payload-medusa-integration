@@ -11,8 +11,8 @@ const sdk = new Medusa({
   apiKey: process.env.NEXT_PUBLIC_MEDUSA_API_SECRET,
 });
 
-// the create moet nog juist gemapt worden aan de hand van de data van newProduct
-const addProduct = async (newProduct: any) => {
+// Function to add a product; note that to take multiple variables, we pass an object
+const addProduct = async (newProduct: { title: string; optionTitle: string; optionValue: string }) => {
 
   const response = await sdk.admin.product.create({
     title: newProduct.title,
@@ -20,10 +20,10 @@ const addProduct = async (newProduct: any) => {
     options: [
       {
       title: newProduct.optionTitle,
-      values: [newProduct.optionValues],
+      values: [newProduct.optionValue],
     },
   ],
-    shipping_profile_id: 'sp_01JKT5BAW15K58EAQ799KT1Q6Z',
+    shipping_profile_id: 'sp_01JKT5BAW15K58EAQ799KT1Q6Z', //hardcoded for now.
   });
 
   console.log('PRODUCT ADDED: ', response);
@@ -39,9 +39,10 @@ const ManageProducts: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
 
+  // the queryclient is used to invalidate the cache (query) after a mutation to reload the data
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const mutation = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['admin-products']});
@@ -66,10 +67,9 @@ const ManageProducts: React.FC = () => {
       return;
     }
 
-    console.log('Mutating with:', { title, optionTitle, optionValue });
-    mutate({ title, optionTitle, optionValue });
+    // Call the mutation function with the variables; multiple variables have to be mapped to an object
+    mutation.mutate({ title, optionTitle, optionValue });
   };
-
 
   return (
     <Gutter>
