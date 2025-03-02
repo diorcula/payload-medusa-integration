@@ -1,4 +1,5 @@
 import type { Config } from 'payload'
+import CustomAdminUI from './admin/CustomAdminUI'
 
 export const MedusaPlugin = (incomingConfig: Config): Config => {
   // create copy of incoming config
@@ -14,6 +15,7 @@ export const MedusaPlugin = (incomingConfig: Config): Config => {
     ...config.admin,
     components: {
       ...config.admin?.components,
+      afterNavLinks: ['/plugins/medusa-plugin/afterNavLinks/LinkToCustomView.tsx'],
       views: {
         ...config.admin?.components?.views,
         myCustomView: {

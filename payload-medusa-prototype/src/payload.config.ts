@@ -16,9 +16,6 @@ import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 import MedusaPlugin from './plugins/medusa-plugin'
 
-// import MedusaPlugin from './plugins/medusa-plugin' // Ensure correct import
-// console.log('MedusaPlugin:', MedusaPlugin) // Add this line to log the plugin
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -27,15 +24,6 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname), // Ensure the base directory is correct
     },
-    // components: {
-    //   views: {
-    //     // Custom views are public by default; see reference: https://payloadcms.com/docs/guides/custom-views
-    //     MedusaProductsView: {
-    //       Component: '/components/MedusaProducts.tsx', // Correct the path here
-    //       path: '/medusa-products', // This is the path where the view will be accessible in the admin: admin/medusa-products
-    //     },
-    //   },
-    // },
     user: Users.slug,
     livePreview: {
       breakpoints: [
