@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Gutter } from '@payloadcms/ui';
-import ListProducts from './ListProducts';
 import ManageProducts from './ManageProducts';
 import ShippingProfiles from './ShippingProfiles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -16,8 +15,7 @@ const CustomAdminUI: React.FC = () => {
     <QueryClientProvider client={queryClient}>
     <Gutter>
       <div>
-        <h1>Medusa Products</h1>
-        <ListProducts />
+        <h1>Medusa Dashboard</h1>
         <ManageProducts />
         <ShippingProfiles />
       </div>

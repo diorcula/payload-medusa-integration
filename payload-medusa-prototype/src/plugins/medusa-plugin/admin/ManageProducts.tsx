@@ -1,15 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Medusa from '@medusajs/js-sdk';
+import sdk from '../utils/medusaSdk';
 import { Gutter, Button, TextInput } from '@payloadcms/ui';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-const sdk = new Medusa({
-  baseUrl: 'http://localhost:9000', // Replace with your Medusa backend URL
-  debug: process.env.NODE_ENV === 'development',
-  apiKey: process.env.NEXT_PUBLIC_MEDUSA_API_SECRET,
-});
+import ListProducts from './ListProducts';
 
 // Function to add a product; note that to take multiple variables, we pass an object
 const addProduct = async (newProduct: { title: string; optionTitle: string; optionValue: string }) => {
@@ -31,6 +26,12 @@ const addProduct = async (newProduct: { title: string; optionTitle: string; opti
 
 };
 
+const deleteProduct = async (productId: string) => {
+  const response = await sdk.admin.product.delete(productId);
+  console.log('PRODUCT DELETED: ', response);
+  return response;
+};
+
 
 const ManageProducts: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -42,7 +43,7 @@ const ManageProducts: React.FC = () => {
   // the queryclient is used to invalidate the cache (query) after a mutation to reload the data
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const addMutation = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['admin-products']});
@@ -56,6 +57,17 @@ const ManageProducts: React.FC = () => {
     },
   });
 
+      // Deleting a product
+  const deleteMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['admin-products']});
+    },
+    onError: (error) => {
+      console.error('Error deleting product:', error);
+      setError('Error deleting product');
+    },
+  });
 
   const handleAddProduct = (e: any) => {
     e.preventDefault();
@@ -68,36 +80,43 @@ const ManageProducts: React.FC = () => {
     }
 
     // Call the mutation function with the variables; multiple variables have to be mapped to an object
-    mutation.mutate({ title, optionTitle, optionValue });
+    addMutation.mutate({ title, optionTitle, optionValue });
   };
 
   return (
     <Gutter>
       <div>
-        <h2>Add Product</h2>
-        {error && <div>Error: {error}</div>}
-        <TextInput
-          label="Title"
-          value={title}
-          onChange={(e: any) => setTitle(e.target.value)}
-          path="title"
-        />
-        <TextInput
-          label="Option Title"
-          value={optionTitle}
-          onChange={(e:any) => setOptionTitle(e.target.value)}
-          path="optionTitle"
-        />
-        <TextInput
-          label="Option Value"
-          value={optionValue}
-          onChange={(e:any) => setOptionValue(e.target.value)}
-          path="optionValue"
-        />
-
-        <Button onClick={handleAddProduct}>Add Product</Button>
-
+        <h1>Manage Products</h1>
+        <ListProducts onDelete={(productId) => deleteMutation.mutate(productId)} />
       </div>
+
+      <Gutter>
+        <div>
+          <h2>Add Product</h2>
+          {error && <div>Error: {error}</div>}
+
+            <TextInput
+              label="Title"
+              value={title}
+              onChange={(e: any) => setTitle(e.target.value)}
+              path="title"
+            />
+            <TextInput
+              label="Option Title"
+              value={optionTitle}
+              onChange={(e:any) => setOptionTitle(e.target.value)}
+              path="optionTitle"
+            />
+            <TextInput
+              label="Option Value"
+              value={optionValue}
+              onChange={(e:any) => setOptionValue(e.target.value)}
+              path="optionValue"
+            />
+          <Button onClick={handleAddProduct}>Add Product</Button>
+
+        </div>
+      </Gutter>
     </Gutter>
   );
 };
